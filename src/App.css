@@ -41,3 +41,8 @@ button:focus{
 .search{
   width: 30%;
 }
+
+.studentName{
+  font-size: 25px;
+  margin: 0px 15px;
+}
