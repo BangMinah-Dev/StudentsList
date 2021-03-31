@@ -1,3 +1,5 @@
+import "./Icon"
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 export default function List({ data, handleShow }) {
     const studentList = data.map((student) => (
         <tr key={student.id}>
@@ -7,17 +9,19 @@ export default function List({ data, handleShow }) {
             <td>{student.phone}</td>
             <td className="text-center">
                 <button
-                    id="buttonEdit"
+                    databutton="buttonEdit"
                     className="btn btn-success mr-3"
                     onClick={(event) => handleShow(event, student.id, student.name, student.birthday, student.email, student.phone)}
                 >
+                    <FontAwesomeIcon className="mr-2" icon="edit"></FontAwesomeIcon>
                     Sửa
                 </button>
                 <button
-                    id="buttonDelete"
+                    databutton="buttonDelete"
                     className="btn btn-danger"
                     onClick={(event) => handleShow(event, student.id, student.name)}
                 >
+                    <FontAwesomeIcon className="mr-2" icon="trash-alt"></FontAwesomeIcon>
                     Xóa
                 </button>
             </td>

@@ -21,7 +21,7 @@ function App() {
     const [studentEmail, setStudentEmail] = useState("");
     const [studentPhone, setStudentPhone] = useState("");
 
-    // Thông tin sinh viên người dùng nhập vào
+    // Thông tin sinh viên người dùng nhập vào thay đổi State
     const name = (event) => setStudentName(event.target.value);
     const birthDay = (event) => setStudentBirthDay(event.target.value);
     const email = (event) => setStudentEmail(event.target.value);
@@ -38,7 +38,7 @@ function App() {
         stdEmail,
         stdPhone
     ) => {
-        setWhichModal(event.target.id);
+        setWhichModal(event.target.attributes[0].value);
         setidToRemove(stdID);
         setStudentName(stdName);
         setStudentBirthDay(stdBirthDay);
