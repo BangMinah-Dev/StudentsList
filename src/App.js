@@ -48,7 +48,7 @@ function App() {
     };
 
     // Thêm mới học viên
-    const [newID, setNewID] = useState(11);
+    const [newID, setNewID] = useState(12);
 
     function addNew() {
         setNewID(newID + 1);
@@ -67,15 +67,17 @@ function App() {
 
     // Chỉnh sửa học viên
     function editItem(){
-        let edit = {
-            id: newID,
-            name: studentName,
-            birthday: studentBirthDay,
-            email: studentEmail,
-            phone: studentPhone,
-        };
+        let newArr = [...students];
 
-        students.unshift(edit);
+        let index = newArr.findIndex( (student) => student.id === idToRemove)
+        if(index > -1){
+            newArr[index].name = studentName
+            newArr[index].birthday = studentBirthDay
+            newArr[index].email = studentEmail
+            newArr[index].phone = studentPhone
+        }
+
+        setNewStudents(newArr)
         setShow(false);
     }
 
@@ -112,6 +114,7 @@ function App() {
                     email={email}
                     phone={phone}
                     addNew={addNew}
+                    editItem={editItem}
                     deleteItem={deleteItem}
                 ></ModalCustom>
             </div>

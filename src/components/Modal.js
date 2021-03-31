@@ -14,6 +14,7 @@ export default function ModalCustom({
     email,
     phone,
     addNew,
+    editItem,
     deleteItem,
 }) {
     // console.log(whichModal);
@@ -90,7 +91,7 @@ export default function ModalCustom({
                     </Button>
                 )}
                 {whichModal === "buttonEdit" && (
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" onClick={editItem}>
                         Lưu
                     </Button>
                 )}
