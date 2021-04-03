@@ -16,7 +16,7 @@ export default function ModalCustom({
     editItem,
     deleteItem,
 }) {
-
+    
     return (
         <Modal
             show={show}
@@ -26,10 +26,14 @@ export default function ModalCustom({
         >
             <Modal.Header closeButton>
                 {whichModal === "buttonAdd" && (
-                    <Modal.Title className="text-primary">Thêm mới học viên</Modal.Title>
+                    <Modal.Title className="text-primary">
+                        Thêm mới học viên
+                    </Modal.Title>
                 )}
                 {whichModal === "buttonEdit" && (
-                    <Modal.Title className="text-success">Chỉnh sửa học viên</Modal.Title>
+                    <Modal.Title className="text-success">
+                        Chỉnh sửa học viên
+                    </Modal.Title>
                 )}
                 {whichModal === "buttonDelete" && (
                     <Modal.Title className="text-danger">
@@ -118,19 +122,17 @@ export default function ModalCustom({
                 <Button variant="secondary" onClick={handleClose}>
                     Đóng
                 </Button>
-                {whichModal === "buttonAdd" && ( 
-                    [
-                        (studentName === undefined) || (studentName === "") ? (
-                            <Button variant="primary" onClick={addNew} disabled>
-                                Thêm mới
-                            </Button>
-                        ) : (
-                            <Button variant="primary" onClick={addNew}>
-                                Thêm mới
-                            </Button>
-                        )
-                    ]
-                )}
+                {whichModal === "buttonAdd" && [
+                    studentName === undefined || studentName === "" ? (
+                        <Button variant="primary" onClick={addNew} disabled>
+                            Thêm mới
+                        </Button>
+                    ) : (
+                        <Button variant="primary" onClick={addNew}>
+                            Thêm mới
+                        </Button>
+                    ),
+                ]}
                 {whichModal === "buttonEdit" && (
                     <Button variant="success" onClick={editItem}>
                         Lưu

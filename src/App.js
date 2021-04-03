@@ -1,15 +1,30 @@
 import React from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { useState } from "react";
-import { STUDENTS } from "./fakeData";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import List from "./components/List";
 import ModalCustom from "./components/Modal";
 
 function App() {
     // Hiện thị danh sách
-    const [students, setNewStudents] = useState(STUDENTS);
+    const [students, setStudentsList] = useState([]);
+
+    // useEffect( () => {
+    //     async function getData(){
+    //         const res = await fetch("https://stdmanagement.herokuapp.com/users")
+    //         const data = await res.json()
+    //         setStudentsList(data)
+    //     }
+    //     getData()
+    // }, [])
+
+    useEffect( () => {
+        async function getData(){
+            console.log("a")
+        }
+        getData()
+    },[])
 
     // Phân biệt modal
     const [whichModal, setWhichModal] = useState("");
@@ -66,18 +81,18 @@ function App() {
     }
 
     // Chỉnh sửa học viên
-    function editItem(){
+    function editItem() {
         let newArr = [...students];
 
-        let index = newArr.findIndex( (student) => student.id === idToRemove)
-        if(index > -1){
-            newArr[index].name = studentName
-            newArr[index].birthday = studentBirthDay
-            newArr[index].email = studentEmail
-            newArr[index].phone = studentPhone
+        let index = newArr.findIndex((student) => student.id === idToRemove);
+        if (index > -1) {
+            newArr[index].name = studentName;
+            newArr[index].birthday = studentBirthDay;
+            newArr[index].email = studentEmail;
+            newArr[index].phone = studentPhone;
         }
 
-        setNewStudents(newArr)
+        setStudentsList(newArr);
         setShow(false);
     }
 
@@ -86,7 +101,7 @@ function App() {
         const removeItem = students.filter(
             (student) => student.id !== idToRemove
         );
-        setNewStudents(removeItem);
+        setStudentsList(removeItem);
         setShow(false);
     }
 

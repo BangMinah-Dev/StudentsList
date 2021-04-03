@@ -3,7 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 export default function List({ data, handleShow }) {
     const studentList = data.map((student) => (
         <tr key={student.id}>
-            <td>{student.name}</td>
+            <td><p>{student.name}</p></td>
             <td>{student.birthday}</td>
             <td>{student.email}</td>
             <td>{student.phone}</td>

@@ -42,7 +42,16 @@ button:focus{
   width: 30%;
 }
 
+td p{
+  height: 38px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin: 0;
+}
+
 .studentName{
   font-size: 25px;
+  font-weight: bold;
   margin: 0px 15px;
 }
