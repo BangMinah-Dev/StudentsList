@@ -1,7 +1,7 @@
 import { Pagination } from "react-bootstrap";
 
-export default function pagination({ totalItems, changePage, page }) {
-    let active = page
+export default function pagination({ totalItems, changePage, prev, next, page }) {
+    let active = page;
     let paginationItems = [];
     let number = totalItems / 100;
     for (let i = 1; i <= number; i++) {
@@ -9,17 +9,24 @@ export default function pagination({ totalItems, changePage, page }) {
     }
 
     let numberOfPagination = paginationItems.map((item) => (
-        <Pagination.Item active={item === active} key={item} onClick={() => changePage(item)}>
+        <Pagination.Item
+            active={item === active}
+            key={item}
+            onClick={() => changePage(item)}
+        >
             {item}
         </Pagination.Item>
     ));
+
     return (
-        <Pagination>
-            <Pagination.First onClick={() => changePage(1)}/>
-            <Pagination.Prev />
-            {numberOfPagination}
-            <Pagination.Next />
-            <Pagination.Last />
-        </Pagination>
+        <div>
+            <Pagination>
+                <Pagination.First onClick={() => changePage(1)} />
+                <Pagination.Prev onClick={prev} />
+                {numberOfPagination}
+                <Pagination.Next onClick={next} />
+                <Pagination.Last onClick={() => changePage(number)} />
+            </Pagination>
+        </div>
     );
 }

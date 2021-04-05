@@ -16,15 +16,13 @@ function App() {
     useEffect(() => {
         async function getData() {
             const res = await fetch(
-                `https://stdmanagement.herokuapp.com/users?_page=${page}&_limit=8`
+                `https://stdmanagement.herokuapp.com/users?_page=${page}&_limit=100`
             );
             const data = await res.json();
 
             let itemsCount = res.headers.get("X-Total-Count");
             setTotalItems(itemsCount);
-            // console.log(itemsCount);
             setStudentsList(data);
-            // console.log(data.length);
         }
         getData();
     }, [page]);
@@ -32,7 +30,15 @@ function App() {
     // Pagination
     function changePage(item) {
         setPage(item)
-        console.log(item)
+        console.log(page)
+    }
+
+    function prev(){
+        setPage(page - 1)
+    }
+
+    function next(){
+        setPage(page + 1)
     }
 
     // Phân biệt modal
@@ -168,6 +174,8 @@ function App() {
                 <Pagination
                     totalItems={totalItems}
                     changePage={changePage}
+                    prev={prev}
+                    next={next}
                     page={page}
                 ></Pagination>
             </div>
