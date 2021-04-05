@@ -5,22 +5,35 @@ import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import List from "./components/List";
 import ModalCustom from "./components/ModalCustom";
-import { Pagination } from "react-bootstrap";
+import Pagination from "./components/Pagination";
 
 function App() {
     // Hiện thị danh sách
     const [students, setStudentsList] = useState([]);
+    const [totalItems, setTotalItems] = useState(0);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
         async function getData() {
             const res = await fetch(
-                "https://stdmanagement.herokuapp.com/users?_page=1&_limit=8"
+                `https://stdmanagement.herokuapp.com/users?_page=${page}&_limit=8`
             );
             const data = await res.json();
+
+            let itemsCount = res.headers.get("X-Total-Count");
+            setTotalItems(itemsCount);
+            // console.log(itemsCount);
             setStudentsList(data);
+            // console.log(data.length);
         }
         getData();
-    }, []);
+    }, [page]);
+
+    // Pagination
+    function changePage(item) {
+        setPage(item)
+        console.log(item)
+    }
 
     // Phân biệt modal
     const [whichModal, setWhichModal] = useState("");
@@ -74,7 +87,7 @@ function App() {
             body: JSON.stringify(newItem),
         });
 
-        students.push(newItem);
+        students.unshift(newItem);
         setShow(false);
     }
 
@@ -116,11 +129,7 @@ function App() {
         setStudentsList(removeItem);
 
         fetch(`https://stdmanagement.herokuapp.com/users/${idToRemove}`, {
-            method: "DELETE",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(),
+            method: "DELETE"
         });
 
         setStudentsList(removeItem);
@@ -156,23 +165,11 @@ function App() {
                 ></ModalCustom>
             </div>
             <div className="container d-flex justify-content-center">
-                <Pagination>
-                    <Pagination.First />
-                    <Pagination.Prev />
-                    <Pagination.Item>{1}</Pagination.Item>
-                    <Pagination.Ellipsis />
-
-                    <Pagination.Item>{10}</Pagination.Item>
-                    <Pagination.Item>{11}</Pagination.Item>
-                    <Pagination.Item active>{12}</Pagination.Item>
-                    <Pagination.Item>{13}</Pagination.Item>
-                    <Pagination.Item disabled>{14}</Pagination.Item>
-
-                    <Pagination.Ellipsis />
-                    <Pagination.Item>{20}</Pagination.Item>
-                    <Pagination.Next />
-                    <Pagination.Last />
-                </Pagination>
+                <Pagination
+                    totalItems={totalItems}
+                    changePage={changePage}
+                    page={page}
+                ></Pagination>
             </div>
         </div>
     );

@@ -28,7 +28,7 @@ export default function List({ data, handleShow }) {
                 </Button>
             </td>
         </tr>
-    )).reverse();
+    ));
     return (
         <table className="table table-striped">
             <thead className="thead-dark">
