@@ -9,8 +9,8 @@ function Login() {
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
 
-    const [isLogin, setIsLogin]  = useState(200)
-    const history = useHistory()
+    // const [isLogin, setIsLogin]  = useState(200)
+    // const history = useHistory()
 
     let account = {
         email: userEmail,
