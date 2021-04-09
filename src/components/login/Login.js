@@ -24,7 +24,7 @@ function Login() {
             },
             body: JSON.stringify(account),
         }).then((res) => {
-            setIsLogin(res.status)
+            // setIsLogin(res.status)
             console.log(res.status)
         })
     }
