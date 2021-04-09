@@ -3,7 +3,7 @@ import { Pagination } from "react-bootstrap";
 export default function pagination({ totalItems, changePage, prev, next, page }) {
     let active = page;
     let paginationItems = [];
-    let number = totalItems / 100;
+    let number = totalItems / 10;
     for (let i = 1; i <= number; i++) {
         paginationItems.push(i);
     }
