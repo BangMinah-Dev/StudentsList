@@ -6,9 +6,17 @@ import Header from "./Header";
 import List from "./List";
 import ModalCustom from "./ModalCustom";
 import Pagination from "./Pagination";
+import { useHistory } from "react-router-dom";
+
+
 
 function Home() {
-    document.title = "Quản lý học viên"
+    const history = useHistory();
+    if(localStorage.getItem("token") === null){
+        history.push("/login")
+    }
+
+    document.title = "Quản lý học viên";
     // Hiện thị danh sách
     const [students, setStudentsList] = useState([]);
     const [totalItems, setTotalItems] = useState(0);
@@ -54,11 +62,17 @@ function Home() {
     useEffect(() => {
         async function getData() {
             const res = await fetch(
-                `https://stdmanagement.herokuapp.com/users?_page=${page}&_limit=10`
-            );
+                `https://stdmanagement.herokuapp.com/users?_page=${page}&_limit=10`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    }
+                });
             const data = await res.json();
 
             let itemsCount = res.headers.get("X-Total-Count");
+
             setTotalItems(itemsCount);
             setStudentsList(data);
         }
@@ -90,14 +104,12 @@ function Home() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
             body: JSON.stringify(newItem),
-            
         });
         students.unshift(newItem);
         setShow(false);
-
-
     }
 
     // Chỉnh sửa học viên
@@ -122,6 +134,7 @@ function Home() {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
             body: JSON.stringify(newItem),
         });
@@ -139,6 +152,9 @@ function Home() {
 
         fetch(`https://stdmanagement.herokuapp.com/users/${idToRemove}`, {
             method: "DELETE",
+            headers:{
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            }
         });
 
         setStudentsList(removeItem);

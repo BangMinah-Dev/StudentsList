@@ -1,8 +1,22 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useHistory} from "react-router-dom"
+import { useSelector } from "react-redux";
+import { selectUser, selectAvatar } from "../../redux/userSlice";
+
 export default function Profile() {
     document.title = "Thông tin cá nhân";
+
+    const history = useHistory();
+    if(localStorage.getItem("token") === null){
+        history.push("/login")
+    }
+
+    const user = useSelector(selectUser);
+    const avatar = useSelector(selectAvatar);
+
+
     return (
         <div className="container">
             <h1 className="text-center mt-3 mb-3">Hồ sơ cá nhân</h1>
@@ -14,9 +28,13 @@ export default function Profile() {
                     <div className="col-md-9">
                         <img
                             className="d-block mb-2"
-                            src="avatar.jpg"
+                            src={avatar}
                             alt="avatar"
-                            width="150px"
+                            style={{
+                                width: "150px",
+                                height: "150px",
+                                overflow: "hidden"
+                            }}
                         ></img>
                         <Button variant="secondary" style={{ width: 150 }}>
                             Thay ảnh
@@ -40,7 +58,7 @@ export default function Profile() {
                 </div>
                 <div className="row m-5">
                     <div className="col-md-3 font-weight-bold">Họ và tên</div>
-                    <div className="col-md-9">Trần Quang Huy</div>
+                    <div className="col-md-9">{user}</div>
                 </div>
                 <div className="row m-5">
                     <div className="col-md-3 font-weight-bold">Điện thoại</div>
