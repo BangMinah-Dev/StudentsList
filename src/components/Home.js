@@ -16,6 +16,8 @@ function Home() {
         history.push("/login")
     }
 
+    // console.log(localStorage)
+
     document.title = "Quản lý học viên";
     // Hiện thị danh sách
     const [students, setStudentsList] = useState([]);

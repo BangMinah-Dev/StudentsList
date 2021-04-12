@@ -30,7 +30,7 @@ export default function List({ data, handleShow }) {
         </tr>
     ));
     return (
-        <table className="table table-striped">
+        <table className="table table-striped ">
             <thead className="thead-dark">
                 <tr>
                     <th scope="col">Họ tên</th>
