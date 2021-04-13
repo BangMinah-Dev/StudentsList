@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { updateName, updateAvatar } from "../../redux/userSlice";
 
 function Login() {
-    localStorage.removeItem("token");
+    localStorage.clear();
     const dispatch = useDispatch();
 
     document.title = "Đăng nhập";
